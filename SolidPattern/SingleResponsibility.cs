@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SolidPattern.OpenClosedPrinciple;
 
 /* Demo for single responsibility principle , each class has their own responsibility */
 
@@ -60,7 +61,34 @@ namespace Solidpattern
             Process.Start(fileName);
             #endregion
 
-            
+            #region Open-closed principle
+            var apple = new Product("Apple", Color.Green, Size.Small);
+            var tree = new Product("Tree", Color.Green, Size.Large);
+            var house = new Product("House", Color.Blue, Size.Large);
+
+            Product[] products = { apple, tree, house };
+            var nf = new NewFilter();
+            Console.WriteLine("Green products");
+            var result1 = nf.Filter(products, new ColorSpecification(Color.Green));
+            foreach (var i in result1)
+                Console.WriteLine($" - {i.Name} is green");
+            Console.WriteLine("Large products");
+            var result2 = nf.Filter(products, new SizeSpecification(Size.Large));
+            foreach (var i in result2)
+                Console.WriteLine($" - {i.Name} is large");
+            Console.WriteLine("Blue and Large products");
+            var result3 = nf.Filter(products,
+                new AndSpecification<Product>
+                    (new ColorSpecification(Color.Blue),
+                      new SizeSpecification(Size.Large)
+                    )
+                  );
+            foreach (var i in result3)
+                Console.WriteLine($" - {i.Name} is large and blue");
+            Console.ReadKey();
+            #endregion
+
+
         }
     }
 }
