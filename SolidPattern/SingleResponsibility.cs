@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidPattern;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -87,7 +88,15 @@ namespace Solidpattern
                 Console.WriteLine($" - {i.Name} is large and blue");
             Console.ReadKey();
             #endregion
-
+            #region liskov principle
+            Rectangle rec = new Rectangle(4, 3);
+            var d = new Demo();
+            Console.WriteLine($"the area of the rectangle {rec} is {d.Area(rec)}");
+            Rectangle sq = new Square();
+            sq.Width = 5;
+            Console.WriteLine($"the area of the square {sq} is {d.Area(sq)}");
+            Console.ReadKey();
+            #endregion
 
         }
     }
