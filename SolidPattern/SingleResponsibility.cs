@@ -98,6 +98,17 @@ namespace Solidpattern
             Console.ReadKey();
             #endregion
 
+            #region DI principle
+            var parent = new Person("John");
+            var child1 = new Person("Matt");
+            var child2 = new Person("Test");
+
+            Relationships rel = new Relationships();
+            rel.AddParentAndChild(parent, child1);
+            rel.AddParentAndChild(parent, child2);
+            Research rs = new Research(rel);
+            Console.ReadKey();
+            #endregion
         }
     }
 }
